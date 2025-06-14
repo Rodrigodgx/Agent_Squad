@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Móveis Planejados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Inspire-se com nossos Móveis Planejados</h1>
+        <p>Encontre a inspiração que você precisa para transformar sua casa.</p>
+    </header>
+
+    <section id="filters">
+        <h2>Filtrar por:</h2>
+        <label for="ambiente">Ambiente:</label>
+        <select id="ambiente">
+            <option value="todos">Todos</option>
+            <option value="cozinha">Cozinha</option>
+            <option value="quarto">Quarto</option>
+            <option value="sala">Sala</option>
+            <option value="banheiro">Banheiro</option>
+            <option value="escritorio">Escritório</option>
+        </select>
+
+        <label for="estilo">Estilo:</label>
+        <select id="estilo">
+            <option value="todos">Todos</option>
+            <option value="moderno">Moderno</option>
+            <option value="classico">Clássico</option>
+            <option value="rustico">Rústico</option>
+        </select>
+    </section>
+
+    <section id="galeria">
+        <div class="item" data-ambiente="cozinha" data-estilo="moderno">
+            <img src="img/cozinha_moderna.jpg" alt="Cozinha Moderna">
+            <p>Cozinha moderna com ilha central e design minimalista.</p>
+        </div>
+
+        <div class="item" data-ambiente="quarto" data-estilo="classico">
+            <img src="img/quarto_classico.jpg" alt="Quarto Clássico">
+            <p>Quarto clássico com detalhes em madeira e cores suaves.</p>
+        </div>
+
+        <div class="item" data-ambiente="sala" data-estilo="rustico">
+            <img src="img/sala_rustica.jpg" alt="Sala Rústica">
+            <p>Sala rústica com lareira e móveis em madeira maciça.</p>
+        </div>
+
+         <div class="item" data-ambiente="banheiro" data-estilo="moderno">
+            <img src="img/banheiro_moderno.jpg" alt="Banheiro Moderno">
+            <p>Banheiro moderno com design clean e iluminação elegante.</p>
+        </div>
+
+        <div class="item" data-ambiente="escritorio" data-estilo="classico">
+            <img src="img/escritorio_classico.jpg" alt="Escritório Clássico">
+            <p>Escritório clássico com mesa de madeira e estantes planejadas.</p>
+        </div>
+
+         <div class="item" data-ambiente="cozinha" data-estilo="rustico">
+            <img src="img/cozinha_rustica.jpg" alt="Cozinha Rústica">
+            <p>Cozinha rústica com detalhes em pedra e madeira de demolição.</p>
+        </div>
+    </section>
+
+    <section id="depoimentos">
+        <h2>O que nossos clientes dizem:</h2>
+        <div class="depoimento">
+            <img src="img/cliente1.jpg" alt="Cliente Satisfeito">
+            <p>"Adorei o resultado! Meus móveis planejados ficaram incríveis." - Maria Silva</p>
+        </div>
+        <div class="depoimento">
+            <img src="img/cliente2.jpg" alt="Cliente Satisfeito">
+            <p>"Super recomendo! Atendimento excelente e móveis de alta qualidade." - João Pereira</p>
+        </div>
+    </section>
+
+    <section id="cta">
+        <h2>Transforme sua casa agora!</h2>
+        <p>Agende uma visita com um de nossos consultores e comece a planejar seus móveis.</p>
+        <button id="agendar">Agendar Visita</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Móveis Planejados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
