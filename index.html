@@ -3,103 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Móveis Planejados | [Nome da Empresa]</title>
+    <title>Nossos Serviços</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            [Logo da Empresa]
-        </div>
+        <div class="logo">Sua Empresa</div>
         <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Sobre Nós</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
+            <a href="#">Início</a>
+            <a href="#">Sobre</a>
+            <a href="#">Serviços</a>
+            <a href="#">Contato</a>
         </nav>
     </header>
 
-    <section class="banner">
-        <img src="banner.jpg" alt="Banner de Móveis Planejados">
-        <h1>Transforme Seu Espaço com Móveis Planejados</h1>
-        <a href="#projetos" class="cta-button">Descubra Nossos Projetos</a>
+    <section class="hero">
+        <h1>Soluções Inovadoras para o Seu Negócio</h1>
+        <p>Oferecemos serviços de alta qualidade para impulsionar o seu sucesso.</p>
+        <img src="hero-image.jpg" alt="Imagem Hero">
     </section>
 
-    <section id="projetos" class="projetos">
-        <h2>Nossos Projetos</h2>
-        <div class="projetos-grid">
+    <section class="services">
+        <h2>Nossos Serviços</h2>
+        <div class="services-grid">
 
-            <div class="projeto-card">
-                <img src="cozinha.jpg" alt="Cozinha Planejada">
-                <h3>Cozinha Moderna e Funcional</h3>
-                <p>Design inteligente para otimizar o espaço e facilitar o dia a dia.</p>
+            <div class="service-card">
+                <img src="service1.jpg" alt="Serviço 1">
+                <h3>Serviço de Consultoria</h3>
+                <p>Estratégias personalizadas para otimizar seus resultados.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
-            <div class="projeto-card">
-                <img src="quarto.jpg" alt="Quarto Planejado">
-                <h3>Quarto Aconchegante e Personalizado</h3>
-                <p>Crie um ambiente relaxante e com a sua identidade.</p>
+            <div class="service-card">
+                <img src="service2.jpg" alt="Serviço 2">
+                <h3>Desenvolvimento Web</h3>
+                <p>Criação de sites e aplicações web modernas e responsivas.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
-            <div class="projeto-card">
-                <img src="escritorio.jpg" alt="Escritório Planejado">
-                <h3>Escritório Produtivo e Organizado</h3>
-                <p>Maximize o espaço e tenha tudo ao seu alcance para trabalhar com eficiência.</p>
+             <div class="service-card">
+                <img src="service3.jpg" alt="Serviço 3">
+                <h3>Marketing Digital</h3>
+                <p>Aumente sua visibilidade online e atraia mais clientes.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
-             <div class="projeto-card">
-                <img src="sala.jpg" alt="Sala Planejada">
-                <h3>Sala de Estar Confortável e Elegante</h3>
-                <p>Receba seus amigos e familiares em um ambiente acolhedor e sofisticado.</p>
+            <div class="service-card">
+                <img src="service4.jpg" alt="Serviço 4">
+                <h3>Suporte Técnico</h3>
+                <p>Assistência especializada para garantir o bom funcionamento de seus sistemas.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
-             <div class="projeto-card">
-                <img src="banheiro.jpg" alt="Banheiro Planejado">
-                <h3>Banheiro Moderno e Relaxante</h3>
-                <p>Transforme seu banheiro em um spa particular.</p>
+             <div class="service-card">
+                <img src="service5.jpg" alt="Serviço 5">
+                <h3>Treinamento e Capacitação</h3>
+                <p>Desenvolva as habilidades de sua equipe com nossos programas de treinamento.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
-             <div class="projeto-card">
-                <img src="area-de-servico.jpg" alt="Área de Serviço Planejada">
-                <h3>Área de Serviço Funcional e Organizada</h3>
-                <p>Otimize o espaço e facilite as tarefas domésticas.</p>
+            <div class="service-card">
+                <img src="service6.jpg" alt="Serviço 6">
+                <h3>Soluções em Nuvem</h3>
+                <p>Migre para a nuvem e aproveite os benefícios da escalabilidade e segurança.</p>
+                <button class="action-button">Saiba Mais</button>
             </div>
 
         </div>
     </section>
 
-    <section class="contato">
-        <h2>Solicite um Orçamento</h2>
-        <p>Preencha o formulário abaixo e entraremos em contato para discutir suas necessidades.</p>
-
-        <form id="form-orcamento">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" required>
-
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
-
-            <button type="submit" class="cta-button">Enviar Mensagem</button>
+    <section class="contact-form">
+        <h2>Entre em Contato</h2>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Seu Nome">
+            <input type="email" name="email" placeholder="Seu Email">
+            <textarea name="message" placeholder="Sua Mensagem"></textarea>
+            <button type="submit">Enviar Mensagem</button>
         </form>
     </section>
 
     <footer>
-        <p>&copy; 2024 [Nome da Empresa]. Todos os direitos reservados.</p>
-        <p>Contato: [Telefone] | E-mail: [Email]</p>
+        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+        <p>Contato: <a href="mailto:contato@suaempresa.com">contato@suaempresa.com</a> | Telefone: (XX) XXXX-XXXX</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

@@ -2,14 +2,12 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #FFFFFF; /* Branco Fundo */
-    color: #333333; /* Cinza Texto */
+    background-color: #FFFFFF;
+    color: #333333;
 }
 
-/* Cabeçalho */
 header {
-    background-color: #244D61; /* Azul Primário */
-    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -19,230 +17,192 @@ header {
     left: 0;
     width: 100%;
     z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header .logo {
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
 }
 
-header nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-header nav ul li {
+header nav a {
+    color: #333333;
+    text-decoration: none;
     margin-left: 20px;
 }
 
-header nav ul li a {
+header nav a:hover {
+    color: #29ABE2;
+}
+
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('hero-background.jpg');
+    background-size: cover;
+    background-position: center;
     color: #FFFFFF;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-header nav ul li a:hover {
-    color: #FF7F50; /* Laranja Destaque/Ação */
-}
-
-/* Banner */
-.banner {
-    position: relative;
     text-align: center;
-    color: white;
-    padding-top: 80px; /* Altura do header */
+    padding: 120px 20px;
+    margin-top: 80px;
 }
 
-.banner img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    max-height: 600px;
+.hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
-.banner h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2.5em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    width: 80%;
-}
-
-.banner .cta-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #FF7F50; /* Laranja Destaque/Ação */
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.banner .cta-button:hover {
-    background-color: #E67249;
-}
-
-/* Projetos */
-.projetos {
-    padding: 40px;
-    text-align: center;
-}
-
-.projetos h2 {
-    font-size: 2em;
+.hero p {
+    font-size: 16px;
     margin-bottom: 30px;
 }
 
-.projetos-grid {
+.hero img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.services {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    justify-content: center;
+    padding: 0 20px;
 }
 
-.projeto-card {
-    border: 1px solid #F5F5DC; /* Bege Secundário */
-    border-radius: 5px;
-    padding: 20px;
-    text-align: left;
+.service-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projeto-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.projeto-card img {
-    width: 100%;
+.service-card img {
+    max-width: 100%;
     height: auto;
     margin-bottom: 15px;
-    border-radius: 5px;
 }
 
-.projeto-card h3 {
-    font-size: 1.3em;
-    font-weight: bold;
+.service-card h3 {
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 10px;
-    color: #333333; /* Cinza Texto */
 }
 
-.projeto-card p {
-    font-size: 1em;
-    line-height: 1.4;
+.service-card p {
+    font-size: 16px;
 }
 
-/* Contato */
-.contato {
-    background-color: #F5F5DC; /* Bege Secundário */
-    padding: 40px;
+.contact-form {
+    background-color: #f9f9f9;
+    padding: 40px 20px;
     text-align: center;
 }
 
-.contato h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.contato p {
-    font-size: 1.1em;
+.contact-form h2 {
+    font-size: 36px;
+    font-weight: 700;
     margin-bottom: 30px;
 }
 
-.contato form {
-    max-width: 600px;
-    margin: 0 auto;
+.contact-form form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.contato label {
-    font-size: 1em;
-    margin-bottom: 5px;
-    text-align: left;
-    width: 100%;
-    color: #333333; /* Cinza Texto */
-}
-
-.contato input,
-.contato textarea {
-    width: 100%;
-    padding: 12px;
+.contact-form input,
+.contact-form textarea {
     margin-bottom: 20px;
-    border: 1px solid #DDDDDD; /* Cinza Claro */
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1em;
-    color: #333333; /* Cinza Texto */
-    background-color: #FFFFFF; /* Branco Fundo */
+    padding: 8px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-.contato textarea {
-    resize: vertical;
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #29ABE2;
+    outline: none;
 }
 
-.contato .cta-button {
-    background-color: #FF7F50; /* Laranja Destaque/Ação */
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1em;
-}
-
-.contato .cta-button:hover {
-    background-color: #E67249;
-}
-
-.contato .cta-button:active {
-    transform: scale(0.95);
-}
-
-
-/* Rodapé */
 footer {
-    background-color: #244D61; /* Azul Primário */
-    color: #FFFFFF;
-    text-align: center;
+    background-color: #f2f2f2;
     padding: 20px;
-    font-size: 0.9em;
+    text-align: center;
+    font-size: 14px;
 }
 
-/* Responsividade */
+footer a {
+    color: #333333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #29ABE2;
+}
+
+.action-button {
+    background-color: #29ABE2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.action-button:hover {
+    background-color: #217DB8;
+}
+
+.action-button:active {
+    opacity: 0.8;
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    header .logo {
-        margin-bottom: 10px;
+    header nav {
+        margin-top: 10px;
     }
 
-    header nav ul {
-        flex-direction: column;
-    }
-
-    header nav ul li {
+    header nav a {
         margin-left: 0;
-        margin-bottom: 10px;
+        margin-right: 10px;
     }
 
-    .banner h1 {
-        font-size: 2em;
+    .hero {
+        padding: 80px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
     }
 }
