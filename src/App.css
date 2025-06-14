@@ -1,8 +1,0 @@
-.App {
-  text-align: center;
-}
-
-.content {
-  padding: 20px;
-  min-height: calc(100vh - 100px); /* Ajusta a altura do conteúdo para ocupar a tela */
-}
