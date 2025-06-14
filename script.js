@@ -1,0 +1,1 @@
+// Nenhum JavaScript necessário para esta versão inicial
