@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearAllBtn = document.getElementById('clear-all-btn');
     const mapContainer = document.getElementById('map-container');
     const abilityDisplay = document.getElementById('ability-display');
+    const abilityContent = document.getElementById('ability-content');
+    const lancerRoleDisplay = document.getElementById('lancer-role');
 
     // --- MUDANÇA AQUI ---
     // Criamos uma constante para controlar o tamanho dos ícones no canvas.
@@ -349,12 +351,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = canvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
-                const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
-                canvas.style.cursor = objectUnderMouse ? 'grab' : 'crosshair';
-            }
-            isDrawing = false;
-            isDragging = false;
-            // Lógica de finalização de formas foi removida
-            redrawCanvas();
-        } catch (error) {
-            console.error("Erro ao soltar o mouse no canvas:",
+                const objectUnderMouse = getObjectAtPosition(
