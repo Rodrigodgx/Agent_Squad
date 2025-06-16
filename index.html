@@ -3,56 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FragPlanner - Planejador Tático</title>
+    <title>Seletor de Cores</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app-container">
-        <aside id="left-bar">
-            <section id="lancers-section">
-                <h2>Lancers</h2>
-                <div id="lancers-list" class="icon-list">
-                    </div>
-            </section>
-            <section id="utilities-section">
-                <h2>Utilidades</h2>
-                <div id="utilities-list" class="icon-list">
-                    </div>
-            </section>
-        </aside>
 
-        <main>
-            <div id="top-bar">
-                <div class="tool-group">
-                    <label for="map-selector">Mapa:</label>
-                    <select id="map-selector">
-                        <option value="Akhet">Akhet</option>
-                        <option value="Blackmarket">Blackmarket</option>
-                        <option value="Dongtian">Dongtian</option>
-                        <option value="Naos">Naos</option>
-                        <option value="Outpost">Outpost</option>
-                        <option value="Tundra">Tundra</option>
-                        <option value="Yggdrasil">Yggdrasil</option>
-                    </select>
-                </div>
-
-                <div class="tool-group" id="drawing-tools">
-                    <button id="pen-tool" class="tool-btn" title="Caneta (Desenho Livre)">✏️</button>
-                    <button id="eraser-tool" class="tool-btn" title="Borracha">Borracha</button>
-                    <input type="color" id="color-picker" value="#00FFFF" title="Seletor de Cor">
-                </div>
-                
-                <div class="tool-group">
-                    <button id="clear-all-btn" title="Limpar Tudo">🗑️</button>
-                </div>
-            </div>
-            
-            <canvas id="planner-canvas"></canvas>
-        </main>
+    <div class="color-picker-container">
+        <button id="color-picker-button" aria-label="Abrir seletor de cores">
+            <svg id="color-picker-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C9.79 6 8 7.79 8 10C8 12.21 9.79 14 12 14C14.21 14 16 12.21 16 10C16 7.79 14.21 6 12 6Z" fill="#000"/>
+            </svg>
+            Selecionar Cor
+        </button>
+        <input type="color" id="color-picker" style="display:none">
     </div>
+
+    <div id="preview-box" style="width: 100px; height: 100px; border: 1px solid #ccc; margin-top: 20px;"></div>
 
     <script src="script.js"></script>
 </body>
