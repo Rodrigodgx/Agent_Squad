@@ -60,6 +60,43 @@
         </div>
     </section>
 
+    <section id="planner">
+        <h2>Planejador Tático</h2>
+        <div class="planner-container">
+            <div class="controls">
+                <div class="map-selector">
+                    <label for="map-selector">Selecione o Mapa:</label>
+                    <select id="map-selector">
+                        <!-- Map options will be loaded dynamically -->
+                    </select>
+                </div>
+                <div class="tool-bar">
+                    <button class="tool-btn active" id="pen-tool">Caneta</button>
+                    <button class="tool-btn" id="eraser-tool">Borracha</button>
+                    <input type="range" id="eraser-size-slider" min="5" max="50" value="10">
+                    <input type="color" id="color-picker" value="#000000">
+                    <button id="clear-all-btn">Limpar Tudo</button>
+                </div>
+                <div class="lists-container">
+                    <div class="lancers-list" id="lancers-list">
+                        <h3>Lancers</h3>
+                        <!-- Lancers will be loaded dynamically -->
+                    </div>
+                    <div class="utilities-list" id="utilities-list">
+                        <h3>Utilitários</h3>
+                        <!-- Utilities will be loaded dynamically -->
+                    </div>
+                    <div class="ability-display" id="ability-display">
+                        <!-- Ability information will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <div class="map-container" id="map-container">
+                <canvas id="planner-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-content">
             <p>&copy; 2024 FragPlanner. Todos os direitos reservados.</p>
@@ -72,5 +109,7 @@
             </nav>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
