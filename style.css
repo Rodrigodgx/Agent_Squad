@@ -16,6 +16,8 @@ body {
 #app-container {
     display: flex;
     height: 100vh;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
 }
 
 /* Barra Lateral Esquerda */
@@ -28,6 +30,8 @@ body {
     flex-direction: column;
     gap: 30px;
     overflow-y: auto;
+    /* Flexbox properties to allow shrinking on smaller screens */
+    flex-shrink: 0;
 }
 
 #left-bar h2 {
@@ -87,6 +91,8 @@ main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    max-width: 80%; /* Limita a largura máxima para não esticar demais */
+    max-height: 80%; /* Limita a altura máxima para não esticar demais */
 }
 
 /* Barra de Ferramentas Superior */
@@ -151,6 +157,7 @@ main {
     background-size: cover;
     background-position: center;
     cursor: crosshair;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil para destacar */
 }
 
 /* Estilos para a Borracha */
@@ -206,6 +213,11 @@ main {
         width: 38px;
         height: 38px;
     }
+    
+    main {
+        max-width: 90%;
+        max-height: 90%;
+    }
 }
 
 
@@ -213,8 +225,9 @@ main {
 @media (max-width: 768px) {
     #app-container {
         /* Muda a organização de lado a lado para um em cima do outro */
-        flex-direction: column; 
+        flex-direction: column;
         height: auto; /* Permite que o conteúdo defina a altura */
+        align-items: stretch; /* Estica o conteúdo para preencher a largura */
     }
 
     #left-bar {
@@ -225,14 +238,18 @@ main {
         flex-direction: row; /* Organiza as seções de Lancer/Utilidades lado a lado */
         justify-content: space-around; /* Espaça as seções */
         overflow-x: auto; /* Adiciona rolagem horizontal se não couber */
+        padding: 10px;
     }
 
     #left-bar section {
         flex-shrink: 0; /* Impede que as seções encolham */
+        margin: 5px;
     }
 
     main {
-        height: calc(100vh - 160px); /* Ajusta a altura da área principal dinamicamente */
+        height: auto; /* Ajusta a altura da área principal dinamicamente */
+        max-width: 100%; /* Ocupa toda a largura */
+        max-height: none; /* Remove a restrição de altura */
     }
 
     #top-bar {
@@ -244,5 +261,9 @@ main {
     #eraser-tool-container {
         flex-direction: column;
         align-items: flex-start;
+    }
+    
+    #planner-canvas {
+        box-shadow: none; /* Remove a sombra em telas menores */
     }
 }
