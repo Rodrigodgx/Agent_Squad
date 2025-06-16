@@ -272,3 +272,26 @@ footer {
        height: 60px;
     }
 }
+
+/* Estilos para o ícone da borracha */
+.tool-btn#eraser-tool {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px; /* Reduzir o padding para compensar o tamanho da imagem */
+}
+
+.eraser-icon {
+    width: 24px; /* Tamanho do ícone conforme especificado */
+    height: 24px;
+    pointer-events: none; /* Garante que o clique acione o botão, não a imagem */
+}
+
+.tool-btn#eraser-tool:hover {
+    background-color: var(--neon-pink);
+}
+
+.tool-btn#eraser-tool:active {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
