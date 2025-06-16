@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const eraserSizeSlider = document.getElementById('eraser-size-slider');
     const colorPicker = document.getElementById('color-picker');
     const clearAllBtn = document.getElementById('clear-all-btn');
+    const mapContainer = document.getElementById('map-container');
 
     // --- MUDANÇA AQUI ---
     // Criamos uma constante para controlar o tamanho dos ícones no canvas.
@@ -34,12 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function resizeCanvas() {
-        const displayWidth = canvas.clientWidth;
-        const displayHeight = canvas.clientHeight;
-        if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
-            canvas.width = displayWidth;
-            canvas.height = displayWidth;
-        }
+        const displayWidth = mapContainer.clientWidth;
+        const displayHeight = mapContainer.clientHeight;
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+
         redrawCanvas();
     }
 
@@ -90,12 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. LÓGICA DO CANVAS E DESENHO
     // =================================================================
     function redrawCanvas() {
-        const displayWidth = canvas.clientWidth;
-        const displayHeight = canvas.clientHeight;
-        if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
-            canvas.width = displayWidth;
-            canvas.height = displayWidth;
-        }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (backgroundImage.complete && backgroundImage.src) {
             ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
