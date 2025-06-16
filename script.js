@@ -108,6 +108,23 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
     };
 
+    const LANCER_ROLES = {
+        'Aranha': 'Especialista em controle de área e imobilização.',
+        'Axônio': 'Focado em dano em área e suporte defensivo.',
+        'Broker': 'Utiliza táticas de distração e manipulação.',
+        'Chum': 'Especialista em emboscadas e combate corpo a corpo.',
+        'Corona': 'Suporte com habilidades de cura e dano solar.',
+        'Dex': 'Infiltrador e especialista em desabilitar inimigos.',
+        'Hollowpoint': 'Atirador de precisão com alta capacidade de dano.',
+        'Jaguar': 'Rastreador ágil com ataques furtivos.',
+        'Kismet': 'Mestre da ilusão e teletransporte estratégico.',
+        'Nitro': 'Demolidor com habilidades explosivas.',
+        'Pathojen': 'Suporte que enfraquece os inimigos com toxinas.',
+        'Serket': 'Assassino furtivo com venenos debilitantes.',
+        'Sonar': 'Especialista em detecção e suporte estratégico.',
+        'Zéfiro': 'Controlador de área com habilidades de vento.'
+    };
+
     let activeLancer = null; // Para controlar qual Lancer está ativo
     let abilityMenu = null;  // Para controlar o menu de habilidades
 
@@ -387,6 +404,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             abilityDisplay.textContent = 'Habilidades não encontradas.';
+        }
+
+        // Exibe a descrição genérica do Lancer
+        displayLancerRole(lancerName);
+    }
+
+    function displayLancerRole(lancerName) {
+        const role = LANCER_ROLES[lancerName];
+        if (role) {
+            const roleDiv = document.createElement('div');
+            roleDiv.className = 'lancer-role';
+            roleDiv.textContent = `Função: ${role}`;
+            abilityDisplay.appendChild(roleDiv);
         }
     }
 
