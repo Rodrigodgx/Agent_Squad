@@ -5,24 +5,68 @@
     box-sizing: border-box;
 }
 
+/* Variáveis CSS */
+:root {
+    --primary-color: #2979FF;       /* Azul Vibrante */
+    --secondary-color: #F5F5F5;     /* Cinza Claro */
+    --accent-color: #FF9800;        /* Laranja Energético */
+    --text-color: #333333;          /* Cinza Escuro */
+    --background-color: #FFFFFF;    /* Branco */
+    --header-footer-color: #1a1a1a; /* Cinza Escuro Header/Footer*/
+    --neon-pink: #FF00FF;           /* Rosa Neon */
+    --neon-cyan: #00FFFF;           /* Ciano Neon */
+    --neon-yellow: #FFFF00;         /* Amarelo Neon */
+
+    --font-family: 'Nunito Sans', sans-serif;
+    --title-font-size: 32px;
+    --subtitle-font-size: 24px;
+    --default-font-size: 16px;
+    --small-font-size: 10px;
+
+    --default-padding: 16px;
+    --default-border-radius: 4px;
+    --card-border-radius: 8px;
+    --default-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body {
-    font-family: 'Orbitron', sans-serif;
-    background-color: #121212;
+    font-family: var(--font-family);
+    background-color: #121212; /* Fundo escuro para contrastar com o header/footer*/
     color: #E0E0E0;
     overflow: hidden; /* Evita barras de rolagem na página inteira */
+}
+
+/* Estilos para o Header */
+header {
+    background-color: var(--header-footer-color);
+    color: var(--secondary-color);
+    padding: 20px;
+    text-align: left;
+    font-size: var(--title-font-size);
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Garante que o header fique sempre no topo */
+}
+
+header .logo {
+    font-family: 'Orbitron', sans-serif; /* Mantém a fonte original do logo */
 }
 
 /* Container Principal da Aplicação */
 #app-container {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 80px); /* Ajusta a altura subtraindo a altura do header/footer */
+    margin-top: 80px; /* Espaçamento superior para o header não cobrir o conteúdo */
 }
 
 /* Barra Lateral Esquerda */
 #left-bar {
     width: 240px;
     background-color: #1a1a1a;
-    padding: 20px;
+    padding: var(--default-padding);
     border-right: 2px solid #333;
     display: flex;
     flex-direction: column;
@@ -31,55 +75,52 @@ body {
 }
 
 #left-bar h2 {
-    color: #FF00FF; /* Rosa Neon */
-    border-bottom: 1px solid #FF00FF;
+    color: var(--neon-pink); /* Rosa Neon */
+    border-bottom: 1px solid var(--neon-pink);
     padding-bottom: 10px;
     text-transform: uppercase;
+    font-size: var(--subtitle-font-size);
 }
 
 .icon-list {
     display: grid;
-    /* Ajuste para garantir que os ícones tenham espaço */
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: 15px;
 }
 
 .draggable-icon {
-    /* A altura agora é automática para caber imagem e texto */
-    width: 70px; 
+    width: 70px;
     height: auto;
     background-color: #252525;
-    border: 2px solid #00FFFF; /* Ciano Neon */
+    border: 2px solid var(--neon-cyan); /* Ciano Neon */
     cursor: grab;
-    /* Usamos flexbox para organizar a imagem e o texto verticalmente */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5px; /* Adiciona um respiro interno */
+    padding: 5px;
     text-align: center;
     transition: all 0.2s ease;
     user-select: none;
 }
 
 .draggable-icon:hover {
-    background-color: #00FFFF;
+    background-color: var(--neon-cyan);
     color: #121212;
-    box-shadow: 0 0 15px #00FFFF;
+    box-shadow: 0 0 15px var(--neon-cyan);
 }
 
 .draggable-icon span {
-    font-size: 10px;
+    font-size: var(--small-font-size);
     font-weight: bold;
-    pointer-events: none; /* Impede o texto de interferir no arrasto */
+    pointer-events: none;
 }
 
-/* NOVO: Estilos para a imagem e o nome dentro do ícone */
 .draggable-icon img {
     width: 48px;
     height: 48px;
     margin-bottom: 5px;
-    pointer-events: none; /* Impede a imagem de interferir no arrasto */
+    pointer-events: none;
 }
 
 /* Área Principal */
@@ -95,7 +136,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #1a1a1a;
+    background-color: var(--header-footer-color);
     border-bottom: 2px solid #333;
 }
 
@@ -107,33 +148,33 @@ main {
 
 #map-selector, .tool-btn, #color-picker {
     background-color: transparent;
-    border: 2px solid #FF00FF;
+    border: 2px solid var(--neon-pink);
     color: #E0E0E0;
     padding: 8px 12px;
     font-family: 'Orbitron', sans-serif;
     cursor: pointer;
     transition: all 0.2s ease;
+    border-radius: var(--default-border-radius);
 }
 
 .tool-btn:hover, #map-selector:hover {
-    background-color: #FF00FF;
+    background-color: var(--neon-pink);
     color: #121212;
-    box-shadow: 0 0 15px #FF00FF;
+    box-shadow: 0 0 15px var(--neon-pink);
 }
 
-/* Estilo especial para o botão ativo */
 .tool-btn.active {
-    background-color: #00FFFF;
-    border-color: #00FFFF;
+    background-color: var(--neon-cyan);
+    border-color: var(--neon-cyan);
     color: #121212;
-    box-shadow: 0 0 15px #00FFFF;
+    box-shadow: 0 0 15px var(--neon-cyan);
 }
 
 #color-picker {
     width: 50px;
     height: 40px;
     padding: 2px;
-    border-color: #FFFF00; /* Amarelo Neon */
+    border-color: var(--neon-yellow); /* Amarelo Neon */
 }
 
 /* Canvas */
@@ -143,6 +184,19 @@ main {
     background-position: center;
     flex-grow: 1;
     cursor: crosshair;
+}
+
+/* Estilos para o Footer */
+footer {
+    background-color: var(--header-footer-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Garante que o footer fique sempre visível */
 }
 
 /* =================================================================
@@ -174,32 +228,43 @@ main {
 /* Para telas com largura máxima de 768px (Tablets em modo retrato, celulares) */
 @media (max-width: 768px) {
     #app-container {
-        /* Muda a organização de lado a lado para um em cima do outro */
         flex-direction: column; 
-        height: auto; /* Permite que o conteúdo defina a altura */
+        height: auto;
+        margin-top: 140px; /*Ajuste margem app-container*/
+    }
+
+    header {
+       position: fixed;
+       height: 60px;
+       font-size: 1.5em;
     }
 
     #left-bar {
-        width: 100%; /* A barra lateral agora ocupa toda a largura */
-        height: auto; /* A altura se ajusta ao conteúdo */
-        border-right: none; /* Remove a borda direita */
-        border-bottom: 2px solid #333; /* Adiciona uma borda inferior */
-        flex-direction: row; /* Organiza as seções de Lancer/Utilidades lado a lado */
-        justify-content: space-around; /* Espaça as seções */
-        overflow-x: auto; /* Adiciona rolagem horizontal se não couber */
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid #333;
+        flex-direction: row;
+        justify-content: space-around;
+        overflow-x: auto;
     }
 
     #left-bar section {
-        flex-shrink: 0; /* Impede que as seções encolham */
+        flex-shrink: 0;
     }
 
     main {
-        height: calc(100vh - 160px); /* Ajusta a altura da área principal dinamicamente */
+        height: calc(100vh - 200px); /*Calcula a altura subtraindo header/leftbar/footer*/
     }
 
     #top-bar {
-        flex-direction: column; /* Empilha os grupos de ferramentas */
+        flex-direction: column;
         gap: 10px;
         padding: 10px;
+    }
+
+    footer {
+       position: fixed;
+       height: 60px;
     }
 }
