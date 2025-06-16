@@ -282,17 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Lógica do Menu de Habilidades (Hover)
         const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
         if (objectUnderMouse && objectUnderMouse.type === 'icon') {
-            if (activeLancer !== objectUnderMouse) {
-                activeLancer = objectUnderMouse;
-                showAbilityMenu(activeLancer, mouseX, mouseY);
-            }
             canvas.style.cursor = 'grab';
         } else {
             canvas.style.cursor = currentTool === 'eraser' ? 'cell' : 'crosshair';
-            if (activeLancer) {
-                hideAbilityMenu();
-                activeLancer = null;
-            }
         }
         if (!isDragging && !isDrawing) {
             return;
@@ -338,47 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================
     // 5. LÓGICA DO MENU DE HABILIDADES
     // =================================================================
-    function showAbilityMenu(lancer, mouseX, mouseY) {
-        hideAbilityMenu(); // Garante que qualquer menu existente seja removido
-
-        abilityMenu = document.createElement('div');
-        abilityMenu.className = 'ability-menu';
-        abilityMenu.style.left = `${mouseX + 10}px`; // Posiciona o menu um pouco à direita do mouse
-        abilityMenu.style.top = `${mouseY - 10}px`; // Posiciona o menu um pouco acima do mouse
-
-        const abilities = LANCER_ABILITIES[lancer.name];
-        if (abilities) {
-            abilities.forEach(ability => {
-                const img = document.createElement('img');
-                img.src = ability.imagePath;
-                img.alt = ability.name;
-                img.title = ability.name;
-                img.className = 'ability-icon';
-                img.addEventListener('click', () => {
-                    placeAbility(ability, lancer);
-                });
-                abilityMenu.appendChild(img);
-            });
-        } else {
-            console.warn(`Habilidades não encontradas para ${lancer.name}`);
-        }
-
-        document.body.appendChild(abilityMenu);
-    }
-
-    function hideAbilityMenu() {
-        if (abilityMenu) {
-            document.body.removeChild(abilityMenu);
-            abilityMenu = null;
-        }
-    }
-
-    function placeAbility(ability, lancer) {
-        // Lógica para posicionar a habilidade no mapa (ex: desenhar um ícone temporário)
-        console.log(`Habilidade ${ability.name} selecionada para ${lancer.name}`);
-        // Aqui você pode adicionar a lógica para desenhar um indicador visual
-        // no canvas, mostrando onde a habilidade será aplicada.
-    }
+    // Removendo as funções showAbilityMenu, hideAbilityMenu e placeAbility
 
     // Função para exibir as habilidades do Lancer no container dedicado
     function displayLancerAbilities(lancerName) {
