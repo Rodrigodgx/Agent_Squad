@@ -9,7 +9,7 @@ body {
     font-family: 'Orbitron', sans-serif;
     background-color: #121212;
     color: #E0E0E0;
-    overflow: hidden; /* Evita barras de rolagem na página inteira */
+    /*overflow: hidden;*/ /* Removido conforme o plano */
 }
 
 /* Container Principal da Aplicação */
@@ -50,7 +50,7 @@ body {
 
 .draggable-icon {
     /* A altura agora é automática para caber imagem e texto */
-    width: 70px; 
+    width: 70px;
     height: auto;
     background-color: #252525;
     border: 2px solid #00FFFF; /* Ciano Neon */
@@ -176,4 +176,144 @@ main {
 #eraser-size-controls {
     display: flex;
     flex-direction: column;
-    align-items: flex-start
+    align-items: flex-start;
+}
+
+#eraser-size-controls label {
+    font-size: 0.8em;
+    margin-bottom: 3px;
+}
+
+#eraser-size-slider {
+    width: 100px;
+}
+
+/* Barra Lateral Direita */
+#right-bar {
+    width: 240px;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-left: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+#lancer-abilities-container h2 {
+    color: #FFFF00; /* Amarelo Neon */
+    border-bottom: 1px solid #FFFF00;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#ability-display {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ability-item {
+    background-color: #252525;
+    border: 2px solid #00FFFF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.ability-image {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.lancer-role {
+    font-style: italic;
+    color: #aaa;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1200px) {
+    #app-container {
+        flex-direction: column; /* Empilha as barras laterais e o conteúdo principal */
+        align-items: stretch; /* Estica os itens para preencher a largura */
+    }
+
+    #left-bar, #right-bar {
+        width: 100%; /* As barras laterais ocupam a largura total */
+        border: none; /* Remove as bordas */
+        border-bottom: 2px solid #333; /* Adiciona borda inferior */
+        max-height: 200px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px;
+    }
+
+    #left-bar section, #right-bar section {
+        flex-shrink: 0;
+        width: auto;
+        margin-right: 20px;
+    }
+
+    #left-bar h2, #right-bar h2 {
+        font-size: 1.2em;
+    }
+
+    main {
+        max-width: 100%; /* O conteúdo principal ocupa a largura total */
+        max-height: unset;
+    }
+}
+
+@media (max-width: 768px) {
+    #top-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .tool-group {
+        width: 100%;
+    }
+
+    #drawing-tools {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #eraser-size-controls {
+        align-items: stretch;
+    }
+
+    #eraser-size-slider {
+        width: 100%;
+    }
+}
+
+/* Ajuste fino para telas menores */
+@media (max-width: 576px) {
+    .icon-list {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 10px;
+    }
+
+    .draggable-icon {
+        width: 50px;
+    }
+
+    .draggable-icon span {
+        display: none; /* Oculta o texto em telas muito pequenas */
+    }
+
+    .draggable-icon img {
+        width: 32px;
+        height: 32px;
+    }
+
+    #left-bar h2, #right-bar h2 {
+        font-size: 1em;
+    }
+}

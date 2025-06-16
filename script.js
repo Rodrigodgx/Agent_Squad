@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         return div;
     }
-    function loadMap() { /* ...código sem alteração... */ 
+    function loadMap() { /* ...código sem alteração... */
         const mapName = mapSelector.value;
         const imagePath = `assets/maps/${mapName}.PNG`;
         backgroundImage.src = imagePath;
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.lineWidth = 3;
                     ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
                 }
-            } else if (obj.type === 'path') { 
+            } else if (obj.type === 'path') {
                 drawPath(obj);
             }
             // Lógica de desenhar formas foi removida
@@ -224,16 +224,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. MANIPULAÇÃO DE EVENTOS
     // =================================================================
     canvas.addEventListener('dragover', (e) => e.preventDefault());
-    
-    canvas.addEventListener('drop', (e) => { 
-        e.preventDefault(); 
-        const data = JSON.parse(e.dataTransfer.getData('text/plain')); 
-        const rect = canvas.getBoundingClientRect(); 
-        const x = e.clientX - rect.left; 
-        const y = e.clientY - rect.top; 
-        const iconImage = new Image(); 
-        iconImage.src = data.imagePath; 
-        iconImage.onload = () => { 
+
+    canvas.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const iconImage = new Image();
+        iconImage.src = data.imagePath;
+        iconImage.onload = () => {
             const newIcon = {
                 type: 'icon',
                 name: data.name,
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             objectsOnCanvas.push(newIcon);
             redrawCanvas();
-        }; 
+        };
     });
 
     canvas.addEventListener('mousedown', (e) => {
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         redrawCanvas();
     });
-    
+
     canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
@@ -390,11 +390,20 @@ document.addEventListener('DOMContentLoaded', () => {
         eraserToolBtn.classList.add('active');
     });
 
+    // =================================================================
+    // 7. RESIZE OBSERVER E EXECUÇÃO INICIAL
+    // =================================================================
 
-    // =================================================================
-    // 7. EXECUÇÃO INICIAL
-    // =================================================================
-    window.addEventListener('resize', resizeCanvas);
+    // Cria um ResizeObserver para o elemento mapContainer
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            resizeCanvas(); // Redimensiona o canvas quando o tamanho do contêiner muda
+        }
+    });
+
+    // Inicia a observação do elemento mapContainer
+    resizeObserver.observe(mapContainer);
+
     populateLists();
     loadMap();
     penToolBtn.click();
