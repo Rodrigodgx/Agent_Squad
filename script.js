@@ -467,26 +467,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //Modifica o estilo do botão da borracha quando ativo
-    eraserToolBtn.addEventListener('click', () => {
-        eraserToolBtn.classList.add('active');
-    });
-
-    // =================================================================
-    // 7. RESIZE OBSERVER E EXECUÇÃO INICIAL
-    // =================================================================
-
-    // Cria um ResizeObserver para o elemento mapContainer
-    const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            resizeCanvas(); // Redimensiona o canvas quando o tamanho do contêiner muda
-        }
-    });
-
-    // Inicia a observação do elemento mapContainer
-    resizeObserver.observe(mapContainer);
-
-    populateLists();
-    loadMap();
-    penToolBtn.click();
-    resizeCanvas();
-});
+    eraserToolBtn.addEventListener

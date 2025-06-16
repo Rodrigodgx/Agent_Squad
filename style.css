@@ -6,278 +6,229 @@
 }
 
 body {
-    font-family: 'Orbitron', sans-serif;
-    background-color: #121212;
-    color: #E0E0E0;
-    /*overflow: hidden;*/ /* Removido conforme o plano */
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFFFF;
+    color: #333333;
+    line-height: 1.5;
 }
 
-/* Container Principal da Aplicação */
-#app-container {
-    display: flex;
-    height: 100vh;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+/* Cores */
+:root {
+    --azul-primario: #29ABE2;
+    --verde-secundario: #90EE90;
+    --laranja-destaque: #FFA500;
+    --cinza-texto: #333333;
+    --branco-fundo: #FFFFFF;
 }
 
-/* Barra Lateral Esquerda */
-#left-bar {
-    width: 240px;
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-right: 2px solid #333;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    overflow-y: auto;
-    /* Flexbox properties to allow shrinking on smaller screens */
-    flex-shrink: 0;
+/* Estilos Gerais */
+a {
+    color: var(--azul-primario);
+    text-decoration: none;
 }
 
-#left-bar h2 {
-    color: #FF00FF; /* Rosa Neon */
-    border-bottom: 1px solid #FF00FF;
-    padding-bottom: 10px;
-    text-transform: uppercase;
+ul {
+    list-style: none;
 }
 
-.icon-list {
-    display: grid;
-    /* Ajuste para garantir que os ícones tenham espaço */
-    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-    gap: 15px;
-}
-
-.draggable-icon {
-    /* A altura agora é automática para caber imagem e texto */
-    width: 70px;
+img {
+    max-width: 100%;
     height: auto;
-    background-color: #252525;
-    border: 2px solid #00FFFF; /* Ciano Neon */
-    cursor: grab;
-    /* Usamos flexbox para organizar a imagem e o texto verticalmente */
+}
+
+/* Layout */
+body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px; /* Adiciona um respiro interno */
-    text-align: center;
-    transition: all 0.2s ease;
-    user-select: none;
+    min-height: 100vh;
 }
 
-.draggable-icon:hover {
-    background-color: #00FFFF;
-    color: #121212;
-    box-shadow: 0 0 15px #00FFFF;
-}
-
-.draggable-icon span {
-    font-size: 10px;
-    font-weight: bold;
-    pointer-events: none; /* Impede o texto de interferir no arrasto */
-}
-
-/* NOVO: Estilos para a imagem e o nome dentro do ícone */
-.draggable-icon img {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 5px;
-    pointer-events: none; /* Impede a imagem de interferir no arrasto */
-}
-
-/* Área Principal */
-main {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%; /* Alterado de max-width para width */
-    height: 100%; /* Alterado de max-height para height */
-}
-
-/* Barra de Ferramentas Superior */
-#top-bar {
+/* Cabeçalho */
+header {
+    background-color: var(--branco-fundo);
+    color: var(--cinza-texto);
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #1a1a1a;
-    border-bottom: 2px solid #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.tool-group {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-#map-selector, .tool-btn, #color-picker {
-    background-color: transparent;
-    border: 2px solid #FF00FF;
-    color: #E0E0E0;
-    padding: 8px 12px;
-    font-family: 'Orbitron', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tool-btn:hover, #map-selector:hover {
-    background-color: #FF00FF;
-    color: #121212;
-    box-shadow: 0 0 15px #FF00FF;
-}
-
-/* Estilo especial para o botão ativo */
-.tool-btn.active {
-    background-color: #00FFFF;
-    border-color: #00FFFF;
-    color: #121212;
-    box-shadow: 0 0 15px #00FFFF;
-}
-
-#color-picker {
-    width: 50px;
-    height: 40px;
-    padding: 2px;
-    border-color: #FFFF00; /* Amarelo Neon */
-}
-
-/* Canvas */
-#map-container {
-    flex-grow: 1;
-    height: 100%;
-    padding: 10px; /* Ajuste conforme necessário */
-}
-
-#planner-canvas {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Garante que a imagem se ajuste ao canvas sem distorcer */
-    background-color: #222; /* Fundo padrão enquanto o mapa não carrega */
-    background-size: cover;
-    background-position: center;
-    cursor: crosshair;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil para destacar */
-}
-
-/* Estilos para a Borracha */
-#eraser-tool-container {
+header .logo {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 5px;
-    border-radius: 4px;
 }
 
-#eraser-actions {
-    display: flex;
-}
-
-#eraser-size-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-#eraser-size-controls label {
-    font-size: 0.8em;
-    margin-bottom: 3px;
-}
-
-#eraser-size-slider {
-    width: 100px;
-}
-
-/* Barra Lateral Direita */
-#right-bar {
-    width: 240px;
-    background-color: #1a1a1a;
-    padding: 20px;
-    border-left: 2px solid #333;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    overflow-y: auto;
-    flex-shrink: 0;
-}
-
-#lancer-abilities-container h2 {
-    color: #FFFF00; /* Amarelo Neon */
-    border-bottom: 1px solid #FFFF00;
-    padding-bottom: 10px;
-    text-transform: uppercase;
-}
-
-#ability-display {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.ability-item {
-    background-color: #252525;
-    border: 2px solid #00FFFF;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.ability-image {
+header .logo img {
     width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
 }
 
-.lancer-role {
-    font-style: italic;
-    color: #aaa;
+header h1 {
+    font-size: 24px;
+    font-weight: 600;
 }
 
-/* Media Queries para Responsividade */
-@media (max-width: 1200px) {
-    #app-container {
-        flex-direction: column; /* Empilha as barras laterais e o conteúdo principal */
-        align-items: stretch; /* Estica os itens para preencher a largura */
-        height: auto;
-    }
-
-    #left-bar, #right-bar {
-        width: 100%; /* As barras laterais ocupam a largura total */
-        border: none; /* Remove as bordas */
-        border-bottom: 2px solid #333; /* Adiciona borda inferior */
-        max-height: 200px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 10px;
-    }
-
-    #left-bar section, #right-bar section {
-        flex-shrink: 0;
-        width: auto;
-        margin-right: 20px;
-    }
-
-    #left-bar h2, #right-bar h2 {
-        font-size: 1.2em;
-    }
-
-    main {
-        max-width: 100%; /* O conteúdo principal ocupa a largura total */
-        max-height: unset;
-    }
+nav ul {
+    display: flex;
+    gap: 20px;
 }
 
+nav a {
+    color: var(--cinza-texto);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--azul-primario);
+}
+
+.action-button {
+    background-color: var(--laranja-destaque);
+    color: var(--branco-fundo);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #E69100;
+}
+
+.action-button.primary {
+    background-color: var(--laranja-destaque);
+}
+
+/* Hero Section */
+#hero {
+    background-color: var(--branco-fundo);
+    padding: 80px 20px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+#hero .hero-content {
+    text-align: left;
+}
+
+#hero h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--cinza-texto);
+}
+
+#hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: var(--cinza-texto);
+}
+
+#hero .hero-image img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Benefits Section */
+#benefits {
+    background-color: #f9f9f9;
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.benefit img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.benefit h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--cinza-texto);
+}
+
+.benefit p {
+    font-size: 16px;
+    color: var(--cinza-texto);
+}
+
+/* Rodapé */
+footer {
+    background-color: var(--branco-fundo);
+    color: var(--cinza-texto);
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+footer nav a {
+    color: var(--cinza-texto);
+    transition: color 0.3s ease;
+}
+
+footer nav a:hover {
+    color: var(--azul-primario);
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
-    #top-bar {
+    header {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-direction: column;
         gap: 10px;
     }
 
-    .tool-group {
-        width: 100%;
+    #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 
-    #drawing-tools {
+    #hero .hero-content {
+        text-align: center;
+    }
+
+    #hero h1 {
+        font-size: 36px;
+    }
+
+    footer .footer-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    footer nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
