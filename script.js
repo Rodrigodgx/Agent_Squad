@@ -129,94 +129,122 @@ document.addEventListener('DOMContentLoaded', () => {
     let abilityMenu = null;  // Para controlar o menu de habilidades
 
     function resizeCanvas() {
-        const displayWidth = mapContainer.clientWidth;
-        const displayHeight = mapContainer.clientHeight;
-        canvas.width = displayWidth;
-        canvas.height = displayHeight;
+        try {
+            const displayWidth = mapContainer.clientWidth;
+            const displayHeight = mapContainer.clientHeight;
+            canvas.width = displayWidth;
+            canvas.height = displayHeight;
 
-        redrawCanvas();
+            redrawCanvas();
+        } catch (error) {
+            console.error("Erro ao redimensionar o canvas:", error);
+        }
     }
 
 
     // =================================================================
     // 2. FUNÇÕES DE INICIALIZAÇÃO
     // =================================================================
-    function populateLists() { /* ...código sem alteração... */
-        LANCERS.forEach(name => {
-            const icon = createDraggableIcon(name, 'lancer', `assets/lancers/${name}.PNG`);
-            lancersList.appendChild(icon);
-        });
-        UTILITIES.forEach(name => {
-            const icon = createDraggableIcon(name, 'utility', `assets/utils/${name}.PNG`);
-            utilitiesList.appendChild(icon);
-        });
+    function populateLists() {
+        try {
+            LANCERS.forEach(name => {
+                const icon = createDraggableIcon(name, 'lancer', `assets/lancers/${name}.PNG`);
+                lancersList.appendChild(icon);
+            });
+            UTILITIES.forEach(name => {
+                const icon = createDraggableIcon(name, 'utility', `assets/utils/${name}.PNG`);
+                utilitiesList.appendChild(icon);
+            });
+        } catch (error) {
+            console.error("Erro ao popular as listas:", error);
+        }
     }
-    function createDraggableIcon(name, type, imagePath) { /* ...código sem alteração... */
-        const div = document.createElement('div');
-        div.className = 'draggable-icon';
-        div.draggable = true;
-        const img = document.createElement('img');
-        img.src = imagePath;
-        img.alt = name;
-        const span = document.createElement('span');
-        span.textContent = name;
-        div.appendChild(img);
-        div.appendChild(span);
-        div.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', JSON.stringify({ name, type, imagePath }));
-        });
+    function createDraggableIcon(name, type, imagePath) {
+        try {
+            const div = document.createElement('div');
+            div.className = 'draggable-icon';
+            div.draggable = true;
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = name;
+            const span = document.createElement('span');
+            span.textContent = name;
+            div.appendChild(img);
+            div.appendChild(span);
+            div.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', JSON.stringify({ name, type, imagePath }));
+            });
 
-        // Adiciona o evento de clique para exibir as habilidades
-        div.addEventListener('click', () => {
-            displayLancerAbilities(name);
-        });
-        return div;
+            // Adiciona o evento de clique para exibir as habilidades
+            div.addEventListener('click', () => {
+                displayLancerAbilities(name);
+            });
+            return div;
+        } catch (error) {
+            console.error("Erro ao criar ícone arrastável:", error);
+            return null;
+        }
     }
-    function loadMap() { /* ...código sem alteração... */
-        const mapName = mapSelector.value;
-        const imagePath = `assets/maps/${mapName}.PNG`;
-        backgroundImage.src = imagePath;
-        backgroundImage.onload = () => redrawCanvas();
-        backgroundImage.onerror = () => {
-            const errorMessage = `ERRO: Não foi possível carregar o mapa!\n\nVerifique se o arquivo existe em:\n${imagePath}`;
-            console.error(errorMessage);
-            alert(errorMessage);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        };
+    function loadMap() {
+        try {
+            const mapName = mapSelector.value;
+            const imagePath = `assets/maps/${mapName}.PNG`;
+            backgroundImage.src = imagePath;
+            backgroundImage.onload = () => {
+                console.log("Mapa carregado com sucesso:", mapName);
+                redrawCanvas();
+            };
+            backgroundImage.onerror = () => {
+                const errorMessage = `ERRO: Não foi possível carregar o mapa!\n\nVerifique se o arquivo existe em:\n${imagePath}`;
+                console.error(errorMessage);
+                alert(errorMessage);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+        } catch (error) {
+            console.error("Erro ao carregar o mapa:", error);
+        }
     }
 
     // =================================================================
     // 3. LÓGICA DO CANVAS E DESENHO
     // =================================================================
     function redrawCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (backgroundImage.complete && backgroundImage.src) {
-            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-        }
-        objectsOnCanvas.forEach(obj => {
-            if (obj.type === 'icon') {
-                ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
-                if (obj === selectedObject) {
-                    ctx.strokeStyle = '#FFFF00';
-                    ctx.lineWidth = 3;
-                    ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
-                }
-            } else if (obj.type === 'path') {
-                drawPath(obj);
+        try {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (backgroundImage.complete && backgroundImage.src) {
+                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
             }
-            // Lógica de desenhar formas foi removida
-        });
+            objectsOnCanvas.forEach(obj => {
+                if (obj.type === 'icon') {
+                    ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+                    if (obj === selectedObject) {
+                        ctx.strokeStyle = '#FFFF00';
+                        ctx.lineWidth = 3;
+                        ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
+                    }
+                } else if (obj.type === 'path') {
+                    drawPath(obj);
+                }
+                // Lógica de desenhar formas foi removida
+            });
+        } catch (error) {
+            console.error("Erro ao redesenhar o canvas:", error);
+        }
     }
 
     // Apenas a função de desenhar caminho livre permanece
     function drawPath(obj){
-        ctx.beginPath();
-        ctx.moveTo(obj.points[0].x, obj.points[0].y);
-        obj.points.forEach(point => ctx.lineTo(point.x, point.y));
-        ctx.strokeStyle = obj.color;
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.stroke();
+        try {
+            ctx.beginPath();
+            ctx.moveTo(obj.points[0].x, obj.points[0].y);
+            obj.points.forEach(point => ctx.lineTo(point.x, point.y));
+            ctx.strokeStyle = obj.color;
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        } catch (error) {
+            console.error("Erro ao desenhar o caminho:", error);
+        }
     }
     // Funções drawLine, drawRect, drawCircle foram removidas
 
@@ -226,105 +254,150 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.addEventListener('dragover', (e) => e.preventDefault());
 
     canvas.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const iconImage = new Image();
-        iconImage.src = data.imagePath;
-        iconImage.onload = () => {
-            const newIcon = {
-                type: 'icon',
-                name: data.name,
-                img: iconImage,
-                // --- MUDANÇA AQUI ---
-                // Usamos a nossa nova constante para definir o tamanho e o centro do ícone
-                x: x - (ICON_SIZE_ON_CANVAS / 2),
-                y: y - (ICON_SIZE_ON_CANVAS / 2),
-                width: ICON_SIZE_ON_CANVAS,
-                height: ICON_SIZE_ON_CANVAS
+        try {
+            e.preventDefault();
+            const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const iconImage = new Image();
+            iconImage.src = data.imagePath;
+            iconImage.onload = () => {
+                const newIcon = {
+                    type: 'icon',
+                    name: data.name,
+                    img: iconImage,
+                    // --- MUDANÇA AQUI ---
+                    // Usamos a nossa nova constante para definir o tamanho e o centro do ícone
+                    x: x - (ICON_SIZE_ON_CANVAS / 2),
+                    y: y - (ICON_SIZE_ON_CANVAS / 2),
+                    width: ICON_SIZE_ON_CANVAS,
+                    height: ICON_SIZE_ON_CANVAS
+                };
+                objectsOnCanvas.push(newIcon);
+                redrawCanvas();
             };
-            objectsOnCanvas.push(newIcon);
-            redrawCanvas();
-        };
+        } catch (error) {
+            console.error("Erro ao soltar o ícone no canvas:", error);
+        }
     });
 
     canvas.addEventListener('mousedown', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        selectedObject = getObjectAtPosition(mouseX, mouseY);
-
-        if (selectedObject && selectedObject.type === 'icon') {
-            isDragging = true;
-            canvas.style.cursor = 'grabbing';
-            startX = mouseX - selectedObject.x;
-            startY = mouseY - selectedObject.y;
-        } else {
-            selectedObject = null;
-            isDrawing = true;
-            startX = mouseX;
-            startY = mouseY;
-            if (currentTool === 'pen') {
-                objectsOnCanvas.push({ type: 'path', color: currentColor, points: [{ x: startX, y: startY }] });
-            }
-        }
-        redrawCanvas();
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        // Lógica do Menu de Habilidades (Hover)
-        const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
-        if (objectUnderMouse && objectUnderMouse.type === 'icon') {
-            canvas.style.cursor = 'grab';
-        } else {
-            canvas.style.cursor = currentTool === 'eraser' ? 'cell' : 'crosshair';
-        }
-        if (!isDragging && !isDrawing) {
-            return;
-        }
-
-        if (isDragging && selectedObject) {
-            selectedObject.x = mouseX - startX;
-            selectedObject.y = mouseY - startY;
-        } else if (isDrawing) {
-            if (currentTool === 'pen') {
-                objectsOnCanvas[objectsOnCanvas.length - 1].points.push({ x: mouseX, y: mouseY });
-            } else if (currentTool === 'eraser') {
-                eraseAtPosition(mouseX, mouseY, eraserSize);
-            }
-        }
-        redrawCanvas();
-    });
-
-    canvas.addEventListener('mouseup', (e) => {
-        if (isDragging) {
+        try {
             const rect = canvas.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
-            const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
-            canvas.style.cursor = objectUnderMouse ? 'grab' : 'crosshair';
+
+            selectedObject = getObjectAtPosition(mouseX, mouseY);
+
+            if (selectedObject && selectedObject.type === 'icon') {
+                isDragging = true;
+                canvas.style.cursor = 'grabbing';
+                startX = mouseX - selectedObject.x;
+                startY = mouseY - selectedObject.y;
+            } else {
+                selectedObject = null;
+                isDrawing = true;
+                startX = mouseX;
+                startY = mouseY;
+                if (currentTool === 'pen') {
+                    objectsOnCanvas.push({ type: 'path', color: currentColor, points: [{ x: startX, y: startY }] });
+                }
+            }
+            redrawCanvas();
+        } catch (error) {
+            console.error("Erro ao clicar no canvas:", error);
         }
-        isDrawing = false;
-        isDragging = false;
-        // Lógica de finalização de formas foi removida
-        redrawCanvas();
     });
 
-    window.addEventListener('keydown', (e) => { if (e.key === 'Delete' && selectedObject) { objectsOnCanvas = objectsOnCanvas.filter(obj => obj !== selectedObject); selectedObject = null; redrawCanvas(); } });
-    function getObjectAtPosition(x, y) { for (let i = objectsOnCanvas.length - 1; i >= 0; i--) { const obj = objectsOnCanvas[i]; if (obj.type === 'icon') { if (x >= obj.x && x <= obj.x + obj.width && y >= obj.y && y <= obj.y + obj.height) { return obj; } } } return null; }
+    canvas.addEventListener('mousemove', (e) => {
+        try {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            // Lógica do Menu de Habilidades (Hover)
+            const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
+            if (objectUnderMouse && objectUnderMouse.type === 'icon') {
+                canvas.style.cursor = 'grab';
+            } else {
+                canvas.style.cursor = currentTool === 'eraser' ? 'cell' : 'crosshair';
+            }
+            if (!isDragging && !isDrawing) {
+                return;
+            }
+
+            if (isDragging && selectedObject) {
+                selectedObject.x = mouseX - startX;
+                selectedObject.y = mouseY - startY;
+            } else if (isDrawing) {
+                if (currentTool === 'pen') {
+                    objectsOnCanvas[objectsOnCanvas.length - 1].points.push({ x: mouseX, y: mouseY });
+                } else if (currentTool === 'eraser') {
+                    eraseAtPosition(mouseX, mouseY, eraserSize);
+                }
+            }
+            redrawCanvas();
+        } catch (error) {
+            console.error("Erro ao mover o mouse no canvas:", error);
+        }
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+        try {
+            if (isDragging) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                const objectUnderMouse = getObjectAtPosition(mouseX, mouseY);
+                canvas.style.cursor = objectUnderMouse ? 'grab' : 'crosshair';
+            }
+            isDrawing = false;
+            isDragging = false;
+            // Lógica de finalização de formas foi removida
+            redrawCanvas();
+        } catch (error) {
+            console.error("Erro ao soltar o mouse no canvas:", error);
+        }
+    });
+
+    window.addEventListener('keydown', (e) => {
+        try {
+            if (e.key === 'Delete' && selectedObject) {
+                objectsOnCanvas = objectsOnCanvas.filter(obj => obj !== selectedObject);
+                selectedObject = null;
+                redrawCanvas();
+            }
+        } catch (error) {
+            console.error("Erro ao pressionar tecla:", error);
+        }
+    });
+    function getObjectAtPosition(x, y) {
+        try {
+            for (let i = objectsOnCanvas.length - 1; i >= 0; i--) {
+                const obj = objectsOnCanvas[i];
+                if (obj.type === 'icon') {
+                    if (x >= obj.x && x <= obj.x + obj.width && y >= obj.y && y <= obj.y + obj.height) {
+                        return obj;
+                    }
+                }
+            }
+            return null;
+        } catch (error) {
+            console.error("Erro ao obter objeto na posição:", error);
+            return null;
+        }
+    }
     function eraseAtPosition(x, y, eraserSize) {
-        objectsOnCanvas = objectsOnCanvas.filter(obj => {
-            if (obj.type !== 'path') return true;
-            const distanceThreshold = eraserSize;
-            return !obj.points.some(p => Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2)) < distanceThreshold);
-        });
+        try {
+            objectsOnCanvas = objectsOnCanvas.filter(obj => {
+                if (obj.type !== 'path') return true;
+                const distanceThreshold = eraserSize;
+                return !obj.points.some(p => Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2)) < distanceThreshold);
+            });
+        } catch (error) {
+            console.error("Erro ao apagar na posição:", error);
+        }
     }
 
     // =================================================================
@@ -334,41 +407,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para exibir as habilidades do Lancer no container dedicado
     function displayLancerAbilities(lancerName) {
-        abilityDisplay.innerHTML = ''; // Limpa o conteúdo anterior
+        try {
+            abilityDisplay.innerHTML = ''; // Limpa o conteúdo anterior
 
-        const abilities = LANCER_ABILITIES[lancerName];
-        if (abilities) {
-            abilities.forEach(ability => {
-                const abilityDiv = document.createElement('div');
-                abilityDiv.className = 'ability-item';
+            const abilities = LANCER_ABILITIES[lancerName];
+            if (abilities) {
+                abilities.forEach(ability => {
+                    const abilityDiv = document.createElement('div');
+                    abilityDiv.className = 'ability-item';
 
-                const img = document.createElement('img');
-                img.src = ability.imagePath;
-                img.alt = ability.name;
-                img.className = 'ability-image';
-                abilityDiv.appendChild(img);
+                    const img = document.createElement('img');
+                    img.src = ability.imagePath;
+                    img.alt = ability.name;
+                    img.className = 'ability-image';
+                    abilityDiv.appendChild(img);
 
-                const description = document.createElement('p');
-                description.textContent = ability.description;
-                abilityDiv.appendChild(description);
+                    const description = document.createElement('p');
+                    description.textContent = ability.description;
+                    abilityDiv.appendChild(description);
 
-                abilityDisplay.appendChild(abilityDiv);
-            });
-        } else {
-            abilityDisplay.textContent = 'Habilidades não encontradas.';
+                    abilityDisplay.appendChild(abilityDiv);
+                });
+            } else {
+                abilityDisplay.textContent = 'Habilidades não encontradas.';
+            }
+
+            // Exibe a descrição genérica do Lancer
+            displayLancerRole(lancerName);
+        } catch (error) {
+            console.error("Erro ao exibir habilidades do Lancer:", error);
         }
-
-        // Exibe a descrição genérica do Lancer
-        displayLancerRole(lancerName);
     }
 
     function displayLancerRole(lancerName) {
-        const role = LANCER_ROLES[lancerName];
-        if (role) {
-            const roleDiv = document.createElement('div');
-            roleDiv.className = 'lancer-role';
-            roleDiv.textContent = `Função: ${role}`;
-            abilityDisplay.appendChild(roleDiv);
+        try {
+            const role = LANCER_ROLES[lancerName];
+            if (role) {
+                const roleDiv = document.createElement('div');
+                roleDiv.className = 'lancer-role';
+                roleDiv.textContent = `Função: ${role}`;
+                abilityDisplay.appendChild(roleDiv);
+            }
+        } catch (error) {
+            console.error("Erro ao exibir função do Lancer:", error);
         }
     }
 
