@@ -145,6 +145,37 @@ main {
     cursor: crosshair;
 }
 
+/* Estilos para a Borracha */
+#eraser-tool-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #E0E0E0;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+#eraser-actions {
+    display: flex;
+}
+
+#eraser-size-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#eraser-size-controls label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 2px;
+}
+
+#eraser-size-slider {
+    width: 100px;
+}
+
 /* =================================================================
    7. REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
    ================================================================= */
@@ -201,5 +232,10 @@ main {
         flex-direction: column; /* Empilha os grupos de ferramentas */
         gap: 10px;
         padding: 10px;
+    }
+
+    #eraser-tool-container {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

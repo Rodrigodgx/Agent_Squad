@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app-container">
@@ -41,7 +42,15 @@
 
                 <div class="tool-group" id="drawing-tools">
                     <button id="pen-tool" class="tool-btn" title="Caneta (Desenho Livre)">✏️</button>
-                    <button id="eraser-tool" class="tool-btn" title="Borracha">Borracha</button>
+                    <div id="eraser-tool-container">
+                        <div id="eraser-actions">
+                            <button id="eraser-tool" class="tool-btn" title="Borracha">Borracha</button>
+                        </div>
+                        <div id="eraser-size-controls">
+                            <label for="eraser-size-slider">Tamanho:</label>
+                            <input type="range" id="eraser-size-slider" min="5" max="50" value="15">
+                        </div>
+                    </div>
                     <input type="color" id="color-picker" value="#00FFFF" title="Seletor de Cor">
                 </div>
                 

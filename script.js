@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const utilitiesList = document.getElementById('utilities-list');
     const penToolBtn = document.getElementById('pen-tool');
     const eraserToolBtn = document.getElementById('eraser-tool');
+    const eraserSizeSlider = document.getElementById('eraser-size-slider');
     const colorPicker = document.getElementById('color-picker');
     const clearAllBtn = document.getElementById('clear-all-btn');
 
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let objectsOnCanvas = [];
     let selectedObject = null;
     let startX, startY;
+    let eraserSize = parseInt(eraserSizeSlider.value); // Tamanho inicial da borracha
     const backgroundImage = new Image();
 
     const LANCERS = ['Aranha', 'Axônio', 'Broker', 'Chum', 'Corona', 'Dex', 'Hollowpoint', 'Jaguar', 'Kismet', 'Nitro', 'Pathojen', 'Serket', 'Sonar', 'Zéfiro'];
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentTool === 'pen') {
                 objectsOnCanvas[objectsOnCanvas.length - 1].points.push({ x: mouseX, y: mouseY });
             } else if (currentTool === 'eraser') {
-                eraseAtPosition(mouseX, mouseY);
+                eraseAtPosition(mouseX, mouseY, eraserSize);
             }
         }
         redrawCanvas();
@@ -184,7 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('keydown', (e) => { if (e.key === 'Delete' && selectedObject) { objectsOnCanvas = objectsOnCanvas.filter(obj => obj !== selectedObject); selectedObject = null; redrawCanvas(); } });
     function getObjectAtPosition(x, y) { for (let i = objectsOnCanvas.length - 1; i >= 0; i--) { const obj = objectsOnCanvas[i]; if (obj.type === 'icon') { if (x >= obj.x && x <= obj.x + obj.width && y >= obj.y && y <= obj.y + obj.height) { return obj; } } } return null; }
-    function eraseAtPosition(x, y) { objectsOnCanvas = objectsOnCanvas.filter(obj => { if (obj.type !== 'path') return true; const padding = 10; return !obj.points.some(p => Math.abs(p.x - x) < padding && Math.abs(p.y - y) < padding); }); }
+    function eraseAtPosition(x, y, eraserSize) {
+        objectsOnCanvas = objectsOnCanvas.filter(obj => {
+            if (obj.type !== 'path') return true;
+            const distanceThreshold = eraserSize;
+            return !obj.points.some(p => Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2)) < distanceThreshold);
+        });
+    }
 
 
     // =================================================================
@@ -195,6 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
     colorPicker.addEventListener('input', (e) => { currentColor = e.target.value; });
     mapSelector.addEventListener('change', loadMap);
     clearAllBtn.addEventListener('click', () => { if (confirm('Você tem certeza que deseja limpar todo o planejamento?')) { objectsOnCanvas = []; selectedObject = null; redrawCanvas(); } });
+
+    eraserSizeSlider.addEventListener('input', () => {
+        eraserSize = parseInt(eraserSizeSlider.value);
+    });
 
 
     // =================================================================
