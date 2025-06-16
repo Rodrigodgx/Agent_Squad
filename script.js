@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const displayHeight = canvas.clientHeight;
         if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
             canvas.width = displayWidth;
-            canvas.height = displayHeight;
+            canvas.height = displayWidth;
         }
         redrawCanvas();
     }
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const displayHeight = canvas.clientHeight;
         if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
             canvas.width = displayWidth;
-            canvas.height = displayHeight;
+            canvas.height = displayWidth;
         }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (backgroundImage.complete && backgroundImage.src) {
@@ -206,6 +206,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     eraserSizeSlider.addEventListener('input', () => {
         eraserSize = parseInt(eraserSizeSlider.value);
+    });
+
+    //Modifica o estilo do botão da borracha quando ativo
+    eraserToolBtn.addEventListener('click', () => {
+        eraserToolBtn.classList.add('active');
     });
 
 
