@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =================================================================
     // 2. FUNÇÕES DE INICIALIZAÇÃO
     // =================================================================
-    function populateLists() { /* ...código sem alteração... */
+    function populateLists() {
         LANCERS.forEach(name => {
             const icon = createDraggableIcon(name, 'lancer', `assets/lancers/${name}.PNG`);
             lancersList.appendChild(icon);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             utilitiesList.appendChild(icon);
         });
     }
-    function createDraggableIcon(name, type, imagePath) { /* ...código sem alteração... */
+    function createDraggableIcon(name, type, imagePath) {
         const div = document.createElement('div');
         div.className = 'draggable-icon';
         div.draggable = true;
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         return div;
     }
-    function loadMap() { /* ...código sem alteração... */ 
+    function loadMap() {
         const mapName = mapSelector.value;
         const imagePath = `assets/maps/${mapName}.PNG`;
         backgroundImage.src = imagePath;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.lineWidth = 3;
                     ctx.strokeRect(obj.x, obj.y, obj.width, obj.height);
                 }
-            } else if (obj.type === 'path') { 
+            } else if (obj.type === 'path') {
                 drawPath(obj);
             }
             // Lógica de desenhar formas foi removida

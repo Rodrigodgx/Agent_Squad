@@ -146,6 +146,10 @@ main {
     gap: 15px;
 }
 
+.tool-group label {
+    color: var(--secondary-color);
+}
+
 #map-selector, .tool-btn, #color-picker {
     background-color: transparent;
     border: 2px solid var(--neon-pink);
