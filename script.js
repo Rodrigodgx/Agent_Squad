@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorPicker = document.getElementById('color-picker');
     const clearAllBtn = document.getElementById('clear-all-btn');
     const mapContainer = document.getElementById('map-container');
+    const abilityDisplay = document.getElementById('ability-display');
 
     // --- MUDANÇA AQUI ---
     // Criamos uma constante para controlar o tamanho dos ícones no canvas.
@@ -36,74 +37,74 @@ document.addEventListener('DOMContentLoaded', () => {
     // Estrutura de dados para as habilidades dos Lancers
     const LANCER_ABILITIES = {
         'Aranha': [
-            { name: 'Teia Imobilizadora', imagePath: 'assets/lancers/habilidades/aranha_teia.png' },
-            { name: 'Veneno Paralisante', imagePath: 'assets/lancers/habilidades/aranha_veneno.png' },
-            { name: 'Aracnofobia', imagePath: 'assets/lancers/habilidades/aranha_aracnofobia.png' }
+            { name: 'Teia Imobilizadora', imagePath: 'assets/abilities/aranha_teia.png', description: 'Imobiliza o alvo por um curto período.' },
+            { name: 'Veneno Paralisante', imagePath: 'assets/abilities/aranha_veneno.png', description: 'Envenena o alvo, reduzindo sua velocidade.' },
+            { name: 'Aracnofobia', imagePath: 'assets/abilities/aranha_aracnofobia.png', description: 'Causa pânico nos inimigos próximos.' }
         ],
         'Axônio': [
-            { name: 'Pulso Elétrico', imagePath: 'assets/lancers/habilidades/axonio_pulso.png' },
-            { name: 'Sobrecarga', imagePath: 'assets/lancers/habilidades/axonio_sobrecarga.png' },
-            { name: 'Campo de Força', imagePath: 'assets/lancers/habilidades/axonio_campo.png' }
+            { name: 'Pulso Elétrico', imagePath: 'assets/abilities/axonio_pulso.png', description: 'Causa dano em área.' },
+            { name: 'Sobrecarga', imagePath: 'assets/abilities/axonio_sobrecarga.png', description: 'Aumenta o dano do próximo ataque.' },
+            { name: 'Campo de Força', imagePath: 'assets/abilities/axonio_campo.png', description: 'Protege contra dano.' }
         ],
         'Broker': [
-            { name: 'Suborno', imagePath: 'assets/lancers/habilidades/broker_suborno.png' },
-            { name: 'Mercado Negro', imagePath: 'assets/lancers/habilidades/broker_mercado.png' },
-            { name: 'Fuga', imagePath: 'assets/lancers/habilidades/broker_fuga.png' }
+            { name: 'Suborno', imagePath: 'assets/abilities/broker_suborno.png', description: 'Converte um inimigo em aliado temporariamente.' },
+            { name: 'Mercado Negro', imagePath: 'assets/abilities/broker_mercado.png', description: 'Compra itens no mercado negro.' },
+            { name: 'Fuga', imagePath: 'assets/abilities/broker_fuga.png', description: 'Teletransporta para um local seguro.' }
         ],
         'Chum': [
-            { name: 'Mordida', imagePath: 'assets/lancers/habilidades/chum_mordida.png' },
-            { name: 'Esgoto', imagePath: 'assets/lancers/habilidades/chum_esgoto.png' },
-            { name: 'Vomito', imagePath: 'assets/lancers/habilidades/chum_vomito.png' }
+            { name: 'Mordida', imagePath: 'assets/abilities/chum_mordida.png', description: 'Causa dano massivo em um único alvo.' },
+            { name: 'Esgoto', imagePath: 'assets/abilities/chum_esgoto.png', description: 'Entra no esgoto, ficando invisível.' },
+            { name: 'Vomito', imagePath: 'assets/abilities/chum_vomito.png', description: 'Reduz a precisão dos inimigos.' }
         ],
         'Corona': [
-            { name: 'Raio Solar', imagePath: 'assets/lancers/habilidades/corona_raio.png' },
-            { name: 'Cura', imagePath: 'assets/lancers/habilidades/corona_cura.png' },
-            { name: 'Escudo de Luz', imagePath: 'assets/lancers/habilidades/corona_escudo.png' }
+            { name: 'Raio Solar', imagePath: 'assets/abilities/corona_raio.png', description: 'Causa dano contínuo em um alvo.' },
+            { name: 'Cura', imagePath: 'assets/abilities/corona_cura.png', description: 'Cura aliados próximos.' },
+            { name: 'Escudo de Luz', imagePath: 'assets/abilities/corona_escudo.png', description: 'Cria um escudo protetor.' }
         ],
         'Dex': [
-            { name: 'Hackear', imagePath: 'assets/lancers/habilidades/dex_hackear.png' },
-            { name: 'Invisibilidade', imagePath: 'assets/lancers/habilidades/dex_invisibilidade.png' },
-            { name: 'Virus', imagePath: 'assets/lancers/habilidades/dex_virus.png' }
+            { name: 'Hackear', imagePath: 'assets/abilities/dex_hackear.png', description: 'Desabilita as habilidades do inimigo.' },
+            { name: 'Invisibilidade', imagePath: 'assets/abilities/dex_invisibilidade.png', description: 'Fica invisível por um curto período.' },
+            { name: 'Virus', imagePath: 'assets/abilities/dex_virus.png', description: 'Espalha um vírus que causa dano ao longo do tempo.' }
         ],
          'Hollowpoint': [
-            { name: 'Tiro Perfurante', imagePath: 'assets/lancers/habilidades/hollowpoint_tiro.png' },
-            { name: 'Visão Aguçada', imagePath: 'assets/lancers/habilidades/hollowpoint_visao.png' },
-            { name: 'Camuflagem', imagePath: 'assets/lancers/habilidades/hollowpoint_camuflagem.png' }
+            { name: 'Tiro Perfurante', imagePath: 'assets/abilities/hollowpoint_tiro.png', description: 'O tiro atravessa múltiplos alvos.' },
+            { name: 'Visão Aguçada', imagePath: 'assets/abilities/hollowpoint_visao.png', description: 'Aumenta o alcance da visão.' },
+            { name: 'Camuflagem', imagePath: 'assets/abilities/hollowpoint_camuflagem.png', description: 'Torna o Lancer difícil de detectar.' }
         ],
          'Jaguar': [
-            { name: 'Salto', imagePath: 'assets/lancers/habilidades/jaguar_salto.png' },
-            { name: 'Garras', imagePath: 'assets/lancers/habilidades/jaguar_garras.png' },
-            { name: 'Faro', imagePath: 'assets/lancers/habilidades/jaguar_faro.png' }
+            { name: 'Salto', imagePath: 'assets/abilities/jaguar_salto.png', description: 'Salta para um local distante.' },
+            { name: 'Garras', imagePath: 'assets/abilities/jaguar_garras.png', description: 'Causa dano extra com ataques corpo a corpo.' },
+            { name: 'Faro', imagePath: 'assets/abilities/jaguar_faro.png', description: 'Detecta inimigos escondidos.' }
         ],
          'Kismet': [
-            { name: 'Teletransporte', imagePath: 'assets/lancers/habilidades/kismet_teletransporte.png' },
-            { name: 'Inversão', imagePath: 'assets/lancers/habilidades/kismet_inversao.png' },
-            { name: 'Duplicar', imagePath: 'assets/lancers/habilidades/kismet_duplicar.png' }
+            { name: 'Teletransporte', imagePath: 'assets/abilities/kismet_teletransporte.png', description: 'Teletransporta para um local desejado.' },
+            { name: 'Inversão', imagePath: 'assets/abilities/kismet_inversao.png', description: 'Inverte os controles do inimigo.' },
+            { name: 'Duplicar', imagePath: 'assets/abilities/kismet_duplicar.png', description: 'Cria uma cópia do Lancer.' }
         ],
          'Nitro': [
-            { name: 'Bomba', imagePath: 'assets/lancers/habilidades/nitro_bomba.png' },
-            { name: 'SuperVelocidade', imagePath: 'assets/lancers/habilidades/nitro_velocidade.png' },
-            { name: 'Escudo', imagePath: 'assets/lancers/habilidades/nitro_escudo.png' }
+            { name: 'Bomba', imagePath: 'assets/abilities/nitro_bomba.png', description: 'Planta uma bomba que causa dano em área.' },
+            { name: 'SuperVelocidade', imagePath: 'assets/abilities/nitro_velocidade.png', description: 'Aumenta a velocidade de movimento.' },
+            { name: 'Escudo', imagePath: 'assets/abilities/nitro_escudo.png', description: 'Cria um escudo temporário.' }
         ],
          'Pathojen': [
-            { name: 'Doença', imagePath: 'assets/lancers/habilidades/pathojen_doenca.png' },
-            { name: 'Cura', imagePath: 'assets/lancers/habilidades/pathojen_cura.png' },
-            { name: 'Infectar', imagePath: 'assets/lancers/habilidades/pathojen_infectar.png' }
+            { name: 'Doença', imagePath: 'assets/abilities/pathojen_doenca.png', description: 'Causa dano ao longo do tempo.' },
+            { name: 'Cura', imagePath: 'assets/abilities/pathojen_cura.png', description: 'Cura um aliado.' },
+            { name: 'Infectar', imagePath: 'assets/abilities/pathojen_infectar.png', description: 'Espalha a doença para outros inimigos.' }
         ],
          'Serket': [
-            { name: 'Veneno', imagePath: 'assets/lancers/habilidades/serket_veneno.png' },
-            { name: 'Furtividade', imagePath: 'assets/lancers/habilidades/serket_furtividade.png' },
-            { name: 'Cura', imagePath: 'assets/lancers/habilidades/serket_cura.png' }
+            { name: 'Veneno', imagePath: 'assets/abilities/serket_veneno.png', description: 'Envenena o alvo.' },
+            { name: 'Furtividade', imagePath: 'assets/abilities/serket_furtividade.png', description: 'Fica difícil de detectar.' },
+            { name: 'Cura', imagePath: 'assets/abilities/serket_cura.png', description: 'Cura a si mesmo.' }
         ],
          'Sonar': [
-            { name: 'Pulso Sonar', imagePath: 'assets/lancers/habilidades/sonar_pulso.png' },
-            { name: 'Ondas Sonoras', imagePath: 'assets/lancers/habilidades/sonar_ondas.png' },
-            { name: 'Invisibilidade', imagePath: 'assets/lancers/habilidades/sonar_invisibilidade.png' }
+            { name: 'Pulso Sonar', imagePath: 'assets/abilities/sonar_pulso.png', description: 'Revela inimigos próximos.' },
+            { name: 'Ondas Sonoras', imagePath: 'assets/abilities/sonar_ondas.png', description: 'Causa dano em área.' },
+            { name: 'Invisibilidade', imagePath: 'assets/abilities/sonar_invisibilidade.png', description: 'Fica invisível.' }
         ],
         'Zéfiro': [
-            { name: 'Tornado', imagePath: 'assets/lancers/habilidades/zefiro_tornado.png' },
-            { name: 'Rajada de Vento', imagePath: 'assets/lancers/habilidades/zefiro_rajada.png' },
-            { name: 'Planar', imagePath: 'assets/lancers/habilidades/zefiro_planar.png' }
+            { name: 'Tornado', imagePath: 'assets/abilities/zefiro_tornado.png', description: 'Cria um tornado que causa dano.' },
+            { name: 'Rajada de Vento', imagePath: 'assets/abilities/zefiro_rajada.png', description: 'Empurra os inimigos para longe.' },
+            { name: 'Planar', imagePath: 'assets/abilities/zefiro_planar.png', description: 'Permite planar por um curto período.' }
         ],
     };
 
@@ -146,6 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         div.appendChild(span);
         div.addEventListener('dragstart', (e) => {
             e.dataTransfer.setData('text/plain', JSON.stringify({ name, type, imagePath }));
+        });
+
+        // Adiciona o evento de clique para exibir as habilidades
+        div.addEventListener('click', () => {
+            displayLancerAbilities(name);
         });
         return div;
     }
@@ -355,6 +361,33 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Habilidade ${ability.name} selecionada para ${lancer.name}`);
         // Aqui você pode adicionar a lógica para desenhar um indicador visual
         // no canvas, mostrando onde a habilidade será aplicada.
+    }
+
+    // Função para exibir as habilidades do Lancer no container dedicado
+    function displayLancerAbilities(lancerName) {
+        abilityDisplay.innerHTML = ''; // Limpa o conteúdo anterior
+
+        const abilities = LANCER_ABILITIES[lancerName];
+        if (abilities) {
+            abilities.forEach(ability => {
+                const abilityDiv = document.createElement('div');
+                abilityDiv.className = 'ability-item';
+
+                const img = document.createElement('img');
+                img.src = ability.imagePath;
+                img.alt = ability.name;
+                img.className = 'ability-image';
+                abilityDiv.appendChild(img);
+
+                const description = document.createElement('p');
+                description.textContent = ability.description;
+                abilityDiv.appendChild(description);
+
+                abilityDisplay.appendChild(abilityDiv);
+            });
+        } else {
+            abilityDisplay.textContent = 'Habilidades não encontradas.';
+        }
     }
 
     // =================================================================
